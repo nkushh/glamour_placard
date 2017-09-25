@@ -15,7 +15,13 @@
 				<a href="{% url 'store:product_detail' product.pk %}"><img src="{{ product.product_img.url }}" class="img-responsive center-block"></a>
 			</div>
 			<div class="product-detail">
-				<h3><a href="{% url 'store:product_detail' product.pk %}">{{ product.product_name }}</a></h3>
+				<h3><a href="{% url 'store:product_detail' product.pk %}">
+					{% if product.product_name|length > 20 %}
+					{{ product.product_name|slice:"20"}}... 
+					{% else %} 
+					{{ product.product_name }}
+					{% endif %}
+				</a></h3>
 				<p>Ksh.{{ product.price | intcomma }}</p>
 			</div>
 		</div>
