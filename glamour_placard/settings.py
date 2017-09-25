@@ -25,7 +25,7 @@ SECRET_KEY = '9a@gt24=q&joq=a6)6l*bsq-mk957f%4^gf6!afp(&z*og+bvy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1:8000', 'glamour.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'glamour.pythonanywhere.com']
 
 
 # Application definition
