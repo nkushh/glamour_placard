@@ -62,6 +62,17 @@ header nav{
 	float: right;
 }
 
+#menu-icon{
+	display: hidden;
+	width: 40px;
+	height: 40px;
+	background: url('../img/nav.png') no-repeat center;
+}
+
+a:hover#menu-icon{
+	border-radius: 4px 4px 0 0;
+}
+
 /* Hero section styling */
 #hero-section{
 	height: 600px;
@@ -453,6 +464,33 @@ footer li a{
 
 /* Media Queries */
 @media screen and (max-width: 768px){
+
+	#menu-icon{
+	display: inline-block;
+	}
+
+	nav ul, nav:active ul{
+		display: none;
+		z-index: 1000;
+		position: absolute;
+		padding: 20px;
+		background-color: #000;
+		right: 20px;
+		top: 60px;
+		border: 1px solid #fff;
+		border-radius: 2px 0 2px 2px;
+		width: 50%;
+	}
+
+	nav:hover ul{
+		display: block;
+	}
+
+	nav li{
+		text-align: center;
+		width: 100%;
+		padding: 10px 0;
+	}
 
 	.hero-text-wrapper{
 		margin-top: 5%;
