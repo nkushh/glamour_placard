@@ -1,0 +1,97 @@
+{% extends "blog/blog_base.html" %}
+{% load static %}
+
+{% block title %}Post Detail{% endblock %}
+
+{% block page_title %}Post Details{% endblock %}
+
+{% block content %}
+<!-- Recent Posts -->
+<div class="col-md-8 blog-posts">
+	<div class="blog-post">
+		<div class="post-img">
+			<img src="{{ post.featured_img.url }}" class="img-responsive">
+		</div>
+		<div class="post-details">
+			<div class="col-md-6 post-title">
+				<h2><a href="#">{{ post.post_title }}</a></h2>
+				<h4>Category: <a href="#">{{ post.category }}</a></h4>
+			</div>
+			<div class="col-md-6 author">
+				<p>Written by: <a href="#">{{ post.author }}</a></p>
+				<p class="publish-date">Published on: {{ post.created_on }}</p>
+			</div>
+		</div>
+		<div class="post-content">
+			{{ post.post_content | linebreaks }}
+		</div>
+	</div>
+</div>
+
+<!-- Sidebar -->
+<div class="col-md-offset-1 col-md-3 sidebar">
+	<!-- Search form -->
+	<div class="sidebar-search">
+		<h2>Search</h2>
+		<form class="form form-inline subscribe-form" method="POST" action="">
+			<div class="input-group">
+				<input type="text" name="search_text" class="form-control" placeholder="Search ...">
+				<div class="input-group-btn">
+					<button type="submit" class="btn btn-info">Search</button>
+				</div>
+			</div>
+			
+		</form>
+	</div>
+
+	<!-- Recent Posts -->
+	<div class="col-md-12 recent-posts">
+		<h2>Recent Posts</h2>
+		{% for post in posts %}
+		<div class="col-md-12 recent-posts-container">
+			<div class="col-md-6 recent-post-img">
+				<img src="{{ post.featured_img.url }}" class="img-responsive">
+			</div>
+			<div class="col-md-6 recent-post-title">
+				<h3>{{ post.post_title }}</h3>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+	<!-- Gallery -->
+	<div class="col-md-12 sidebar-gallery">
+		<h2>Gallery</h2>
+		<div class="col-md-4">
+			<img src="{% static 'img/blog/post3.jpg' %}" class="img-responsive">
+		</div>
+		<div class="col-md-4">
+			<img src="{% static 'img/blog/post2.jpg' %}" class="img-responsive">
+		</div>
+		<div class="col-md-4">
+			<img src="{% static 'img/blog/post4.jpg' %}" class="img-responsive">
+		</div>
+		<div class="col-md-4">
+			<img src="{% static 'img/blog/post3.jpg' %}" class="img-responsive">
+		</div>
+		<div class="col-md-4">
+			<img src="{% static 'img/blog/post2.jpg' %}" class="img-responsive">
+		</div>
+		<div class="col-md-4">
+			<img src="{% static 'img/blog/post3.jpg' %}" class="img-responsive">
+		</div>
+		<div class="col-md-4">
+			<img src="{% static 'img/blog/post4.jpg' %}" class="img-responsive">
+		</div>
+		<div class="col-md-4">
+			<img src="{% static 'img/blog/post2.jpg' %}" class="img-responsive">
+		</div>
+		<div class="col-md-4">
+			<img src="{% static 'img/blog/post4.jpg' %}" class="img-responsive">
+		</div>
+
+	</div>
+
+</div>
+<!-- End sidebar -->
+{% endblock %}

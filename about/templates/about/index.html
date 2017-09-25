@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section id="hero-section">
+	<div class="container">
+		{% if messages %}
+		{% for message in messages %}
+		<div class="alert alert-{% ifequal message.tags 'warning' %}danger{% else %}{{ message.tags }}{% endifequal%}">{{ message }}</div>
+		{% endfor %}
+		{% endif %}
+		<div class="hero-text-wrapper">
+			<h1>
+			Beauty
+			<span>begins with care.</span>
+			</h1>
+			<p>Some dummy text here before I find something about beauty.</p>
+		</div>
+	</div>
+</section>
+<!-- End Hero section -->
+
+<!-- Start signup section -->
+<section id="sign-up">
+	<div class="container">
+		<h2><span>Subscribe</span> to our blog</h2>
+		<form class="form form-inline" method="POST" action="{% url 'blog:subscribe' %}">{% csrf_token %}
+			<div class="input-group">
+				<input type="email" name="subscriber" class="form-control" placeholder="Your email address ..." required>
+				<div class="input-group-btn">
+					<button type="submit" class="btn btn-info">Subscribe</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+<!-- End signup section -->
+
+<!-- Start home about section -->
+<section id="home-about">
+	<div class="container">
+		<article>
+			<img src="{% static 'img/model1.png' %}" class="img-responsive center-block">
+		</article>
+		<aside>
+			<h1>I am my own beauty</h1>
+			<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+		</aside>
+	</div>
+</section>
+<!-- End home about section -->
+
+
+<!-- Recent Posts section -->
+<section id="recent-posts">
+	<div class="container">
+		<div class="section-header">
+			<h2>Recent Posts</h2>
+		</div>
+		{% for post in posts %}
+		<div class="col-md-3 post-teaser">
+			<img src="{{ post.featured_img.url }}" class="img-responsive">
+			<div class="text">
+				<h3><a href="{% url 'blog:post_detail' post.pk %}">{{ post.post_title }}</a></h3>
+				<p>{{ post.post_content | slice:"100"}}.....<a href="{% url 'blog:post_detail' post.pk %}">Read more</a></p>
+			</div>
+			
+		</div>
+		{% endfor %}
+		
+		</div>
+	</div>
+	
+</section>
+
+<!-- New arrivals section -->
+<section id="new-arrivals">
+	<div class="container">
+		<h2 class="new-arrivals-header">New Arrivals</h2>
+		{% for product in products %}
+		<div class="col-md-3 product-box">
+			<div class="product-img-box">
+				<a href="{% url 'store:product_detail' product.pk %}">
+				<img src="{{ product.product_img.url }}" class="img-responsive">
+				</a>
+			</div>
+			
+			<div class="product-detail">
+				<h3><a href="{% url 'store:product_detail' product.pk %}">
+					{% if product.product_name|length > 20 %}
+					{{ product.product_name|slice:"20"}}... 
+					{% else %} 
+					{{ product.product_name }}
+					{% endif %}
+				</a></h3>
+				<p>Ksh.{{ product.price | intcomma }}</p>
+			</div>
+		</div>
+		{% endfor %}
+		
+		<div class="see-more">
+			<a href="{% url 'store:products' %}"><button type="button" class="btn btn-primary">VIEW MORE</button></a>
+		</div>
+	</div>
+</section>
+
+
+<!-- Contact info section -->
+<section id="contact-info">
+	<div class="col-md-4 box1">
+		<i class="fa fa-phone"></i>
+		<p>+254-715-399-651</p>
+	</div>
+	<div class="col-md-4 box2">
+		<i class="fa fa-map-o"></i>
+		<p>Mbooni Rd, Kileleshwa, Nairobi Kenya</p>
+	</div>
+	<div class="col-md-4 box3">
+		<i class="fa fa-paper-plane-o"></i>
+		<p>Leonardamichael@gmail.com</p>
+	</div>
+</section>
+{% endblock %}

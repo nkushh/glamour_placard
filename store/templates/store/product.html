@@ -1,0 +1,40 @@
+{% extends "store/store_base.html" %}
+{% load humanize %}
+
+{% block title %}Product Detail{% endblock %}
+
+{% block content %}
+<section id="product-details">
+	<div class="container">
+		<div class="page-header"><h2>Item details</h2></div>
+		<div class="col-md-4 item-img">
+			<img src="{{ product.product_img.url }}" class="responsive">
+		</div>
+		<div class="col-md-offset-1 col-md-7 item-details">
+			<h2 class="item-name">{{ product.product_name }}</h2>
+			<table class="table">
+				<tr>
+					<th>Color</td>
+					<td>{{ product.color }}</th>
+				</tr>
+				<tr>
+					<th>Size</td>
+					<td>{{ product.size }}</th>
+				</tr>
+				<tr>
+					<th>Availability</th>
+					<td>{% ifequal product.availability_status 0%}Available{% else %}Not Available{% endifequal %}</td>
+				</tr>
+				<tr>
+					<th>Description</th>
+					<td class="description">{{ product.description }}</td>
+				</tr>
+				<tr>
+					<th>Price</th>
+					<td class="price">Ksh.{{ product.price | intcomma }}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</section>
+{% endblock %}

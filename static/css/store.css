@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Nixie+One|Open+Sans+Condensed:300|Open+Sans:300,400,600,700,800|Rajdhani:300,400,600,700|Roboto:300');
+
+/* Global styling */
+
+
+/* Main content */
+#store-items .product{
+	width: 32%;
+	box-shadow: 2px 2px 15px 2px #ddd;
+	margin-bottom: 5%;
+	margin-left: 1%;
+}
+
+.product .product-img{
+	padding: 0;
+	height: 350px;
+	max-width: 500px;
+}
+
+.product .product-img img{
+	height: 100%;
+	width: 100%;
+}
+
+.product-detail{
+	text-align: center;
+}
+
+.product-detail h3 a{
+	text-decoration: none;
+	color: #000;
+}
+
+.product-detail p{
+	font-size: 16px;
+}
+
+.item-details{
+	padding-left: 5%;
+	border-left: 1px solid #ddd;
+}
+
+.item-details h2.item-name{
+	color: #e91d62;
+}
+
+#product-details {
+	padding-bottom: 5%;
+}
+
+#product-details img {
+	width: 100%;
+	height: 100%;
+}
+
+#product-details .table{
+	border: none;
+	font-size: 18px;
+}
+
+#product-details .table th{
+	border: none;
+	padding: 15px;
+}
+
+#product-details .table td{
+	border: none;
+	padding: 15px;
+}
+
+#product-details .table td.price{
+	font-size: 40px;
+	font-weight: 400;
+	color: #e91d62;
+}
+
+
+
+
+
+
+

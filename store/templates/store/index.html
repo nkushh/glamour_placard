@@ -1,0 +1,25 @@
+{% extends "store/store_base.html" %}
+{% load humanize %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section id="store-items">
+	<div class="container">
+		<div class="page-header">
+			<h2>Glamour Store</h2>
+		</div>
+		{% for product in products %}
+		<div class="col-md-4 product">
+			<div class="product-img">
+				<a href="{% url 'store:product_detail' product.pk %}"><img src="{{ product.product_img.url }}" class="img-responsive center-block"></a>
+			</div>
+			<div class="product-detail">
+				<h3><a href="{% url 'store:product_detail' product.pk %}">{{ product.product_name }}</a></h3>
+				<p>Ksh.{{ product.price | intcomma }}</p>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+{% endblock %}
