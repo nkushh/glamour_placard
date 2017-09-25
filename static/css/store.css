@@ -74,6 +74,13 @@
 	color: #e91d62;
 }
 
+@media screen and (max-width: 768px){
+	#store-items .product{
+		width: 100%;
+	}
+
+}
+
 
 
 
