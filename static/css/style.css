@@ -469,7 +469,7 @@ footer li a{
 	display: inline-block;
 	}
 
-	nav ul, nav:active ul{
+	header ul, header:active ul{
 		display: none;
 		z-index: 1000;
 		position: absolute;
@@ -482,11 +482,11 @@ footer li a{
 		width: 50%;
 	}
 
-	nav:hover ul{
+	header:hover ul{
 		display: block;
 	}
 
-	nav li{
+	header li{
 		text-align: center;
 		width: 100%;
 		padding: 10px 0;
