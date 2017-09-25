@@ -14,7 +14,7 @@
 .product .product-img{
 	padding: 0;
 	height: 350px;
-	max-width: 500px;
+	max-height: 500px;
 }
 
 .product .product-img img{
