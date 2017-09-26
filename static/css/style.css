@@ -489,6 +489,7 @@ footer li a{
 		top: 60px;
 		width: 50%;
 		border-radius: 2px 0 2px 2px;
+		z-index: 10000;
 
 	}
 
