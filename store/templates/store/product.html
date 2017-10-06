@@ -19,7 +19,7 @@
 				</tr>
 				<tr>
 					<th>Size</td>
-					<td>{{ product.size }}</th>
+					<td>{% if product.size %}{{ product.size }}{% else %}N/A{% endif %}</th>
 				</tr>
 				<tr>
 					<th>Availability</th>
