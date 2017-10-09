@@ -467,6 +467,49 @@ footer li a{
 	color: #e91d62;
 }
 
+
+/* Login page */
+#login-area{
+	margin-top: 15%;
+}
+
+#login-area .login-form{
+	padding: 15px;
+	background: #231922;
+	margin: 0 auto;
+	width: 45%;
+	text-align: center;
+	border-radius: 2px;
+}
+
+#login-area .login-form h4{
+	margin-bottom: 3%;
+	font-size: 25px;
+	color: #fff;
+}
+
+#login-area form input{
+	padding: 10px;
+    height: 40px;
+    width: 90%;
+    margin: auto;
+}
+
+#login-area form button{
+    padding: 10px;
+    height: 40px;
+    width: 90%;
+    background: #e91d62;
+    border: none;
+    margin: 5% auto;
+}
+
+.recover-password{
+	text-align: center;
+}
+
+
+
 /* Media Queries */
 @media screen and (max-width: 768px){
 

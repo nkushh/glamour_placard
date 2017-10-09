@@ -1,0 +1,55 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Accounts{% endblock %}
+
+{% block pagetitle %}Accounts{% endblock %}
+
+{% block content %}
+<div class="row">
+
+	{% if messages %}
+	{% for message in messages %}
+	<div {% ifequal message.tags 'error' %} class="alert alert-danger" {% else %} class="alert alert-{{ message.tags }}"{% endifequal %}>{{ message.message }}</div>
+	{% endfor %}
+	{% endif %}
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#newAccount"><i class="fa fa-plus"></i> New Account</button>
+			<h4>Registered accounts</h4>
+		</div>
+		<div class="panel-body">
+			<table class="table table-striped">
+				<thead>
+					<th>Username</th>
+					<th>Email</th>
+					<th>Created on</th>
+					<th>Last login</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+					{% for account in accounts %}
+					<tr>
+						<td>{{ account.username }}</td>
+						<td>{{ account.email }}</td>
+						<td>{{ account.date_joined }}</td>
+						<td>{{ account.last_login }}</td>
+						<td>
+							{% if account.is_active %}
+							<a href="{% url 'authentication:deactivate-account' account.pk %}">deactivate</a>
+							{% else %}
+							<a href="{% url 'authentication:activate-account' account.pk %}">Activate</a>
+							{% endif %} | 
+							<a href="{% url 'authentication:delete-account' account.pk %}" onclick="return confirm('This action is irreversible. Are you sure?');"><i class="fa fa-trash-o" style="color: red;"></i></a>
+						</td>
+					</tr>
+					{% empty %}
+					<tr>
+						<td colspan="4"><h4>No accounts registered yet!</h4></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -17,11 +17,16 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    url(r'^login/$', auth_views.login, {'template_name': 'authentication/login.html'}, name='login'),
+    url(r'^logout/$', auth_views.logout, name='logout', kwargs={'next_page': '/'}),
     url(r'^admin/', admin.site.urls),
     url(r'', include('about.urls', namespace='about')),
+    url(r'^authentication/', include('authentication.urls', namespace='authentication')),
     url(r'^blog/', include('blog.urls', namespace='blog')),
+    url(r'^dashboard/', include('dashboard.urls', namespace='dashboard')),
     url(r'^store/', include('store.urls', namespace='store')),
 ]
 if settings.DEBUG:

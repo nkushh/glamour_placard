@@ -1,0 +1,48 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Blog Posts{% endblock %}
+
+
+{% block pagetitle %}Post Categories{% endblock %}
+
+{% block content %}
+<div class="row">
+
+	{% if messages %}
+	{% for message in messages %}
+	<div {% ifequal message.tags 'error' %} class="alert alert-danger" {% else %} class="alert alert-{{ message.tags }}"{% endifequal %}>{{ message.message }}</div>
+	{% endfor %}
+	{% endif %}
+
+	<div class="action-btns">
+			<button class="btn btn-success" data-toggle="modal" data-target="#postCategory"><i class="fa fa-plus"></i> New Category</button>
+			<a href="{% url 'blog:blog_posts' %}" class="btn btn-primary"><i class="fa fa-list"></i> Blog Posts</a>
+	</div>
+
+	<div class="table-responsive">
+		
+		<table class="table table-striped">
+			<thead>
+				<th>Category #</th>
+				<th>Category</th>
+				<th>Created on</th>
+				<th class="text-center">Action</th>
+			</thead>
+			<tbody>
+				{% for category in categories %}
+				<tr>
+					<td>{{ category.pk }}</td>
+					<td><a href="{% url 'blog:category_details' category.pk %}">{{ category.category_name }}</a></td>
+					<td>{{ category.date_added }}</td>
+					<td class="text-center">
+						<a href="{% url 'blog:edit_category' category.pk %}"><i class="fa fa-edit"></i> Edit</a> | 
+						<a href="{% url 'blog:delete_category' category.pk %}" onclick="return confirm('This action is irreversible. Are you sure?');" style="color: red;"><i class="fa fa-trash-o"></i> Delete</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+{% endblock %}

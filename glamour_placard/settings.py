@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     # Third party apps
     # Custom apps
     'about',
+    'authentication',
     'blog',
+    'dashboard',
     'store',
 ]
 
@@ -128,7 +130,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-
+# Media files uploads configuration
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Login redirect
+LOGIN_REDIRECT_URL = '/dashboard'
 
