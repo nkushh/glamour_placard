@@ -147,8 +147,8 @@ def new_post(request):
 # 	return render(request, "dashboard/post_details.html", context)
 
 @login_required(login_url='login')
-def post_details(request, post):
-	blog_post = get_object_or_404(Post, pk=post)
+def post_details(request, post_id):
+	blog_post = get_object_or_404(Post, pk=post_id)
 
 	context = {
 		'post' : blog_post,
@@ -158,11 +158,11 @@ def post_details(request, post):
 
 # Function to publish a draft post
 @login_required(login_url='login')
-def publish_post(request, post):
-	blog_post = get_object_or_404(Post, pk=post)
+def publish_post(request, post_id):
+	blog_post = get_object_or_404(Post, pk=post_id)
 	blog_post.publish()
 	messages.success(request, "Success! Blog Post has been published and available to the public.")
-	return redirect("dashboard:post_details", post=post)
+	return redirect("dashboard:post_details", post_id=post_id)
 
 @login_required(login_url='login')
 def new_blog_post(request):
@@ -183,20 +183,34 @@ def new_blog_post(request):
 	else:
 		return redirect('blog:new_post')
 
-# @login_required(login_url='login')
-# def update_blog_post(request, post_id):
-# 	post = get_object_or_404(Post, pk=post_id)
-# 	if request.method=="POST":
-# 		form = BlogPostForms(request.POST, request.FILES, instance=post)
-# 		if form.is_valid():
-# 			form.save()
-# 			return redirect("dashboard:post-details", post_id=post_id)
-# 	else:
-# 		context = {
-# 			'form' : BlogPostForms(instance=post),
-# 			'post' : post,
-# 		}
-# 	return render(request, "dashboard/edit_blog_post.html", context)
+
+@login_required(login_url='login')
+def edit_post(request, post_id):
+	blog_post = get_object_or_404(Post, pk=post_id)
+	categories = Categorie.objects.all()
+
+	context = {
+		'post' : blog_post,
+		'categories' : categories,
+	}
+
+	return render(request, "dashboard/edit-post.html", context)
+
+@login_required(login_url='login')
+def update_post(request, post_id):
+	post = get_object_or_404(Post, pk=post_id)
+	if request.method=="POST":
+		post.category = get_object_or_404(Categorie, pk=request.POST['category'])
+		post.post_title = request.POST['post_title']
+		post.post_content = request.POST['post_content']
+		post.featured_img = request.FILES['featured_img']
+		
+		post.save()
+		messages.success(request, "Success! {} details have been updated.".format(post.post_title))
+		return redirect("blog:post_details", post_id=post_id)
+	else:
+		messages.error(request, "Error! {} details have not been updated.".format(post.post_title))
+		return redirect("blog:post_details", post_id=post_id)
 
 # @login_required(login_url='login')
 # def allDrafts(request):
@@ -208,11 +222,11 @@ def new_blog_post(request):
 # 	posts = Post.objects.filter(published_on__lte=timezone.now()).order_by('-created_on')
 # 	return render(request, 'blog/posts.html', {'posts':posts})
 
-# @login_required(login_url='login')
-# def delete_blog_post(request, post_id):
-# 	post = get_object_or_404(Post, pk=post_id)
-# 	post.delete()
-# 	return redirect("dashboard:view-posts")
+@login_required(login_url='login')
+def delete_blog_post(request, post_id):
+	post = get_object_or_404(Post, pk=post_id)
+	post.delete()
+	return redirect("blog:posts")
 
 # @login_required(login_url='login')
 # def posts_comments(request):

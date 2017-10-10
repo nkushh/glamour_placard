@@ -1,8 +1,8 @@
 {% extends "dashboard/base.html" %}
 
-{% block title %}New Post{% endblock %}
+{% block title %}Edit Post{% endblock %}
 
-{% block pagetitle %}New Post{% endblock %}
+{% block pagetitle %}Edit Post{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -13,20 +13,20 @@
 		<div {% ifequal message.tags 'error' %} class="alert alert-danger" {% else %} class="alert alert-{{ message.tags }}"{% endifequal %}>{{ message.message }}</div>
 		{% endfor %}
 		{% endif %}
-		
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4>Post Details</h4>
 			</div>
 			<div class="panel-body">
-				<form method="POST" action="{% url 'blog:save_post' %}" enctype="multipart/form-data">{% csrf_token %}
+				<form method="POST" action="{% url 'blog:update_post' post.pk %}" enctype="multipart/form-data">{% csrf_token %}
 					<div class="form-group">
 						<label>Post title</label>
-						<input type="text" name="post_title" class="form-control">
+						<input type="text" name="post_title" class="form-control" value="{{ post.post_title }}">
 					</div>
 					<div class="form-group">
 						<label>Post body</label>
-						<textarea name="post_content" class="form-control" rows="10"></textarea>
+						<textarea name="post_content" class="form-control" rows="10">{{ post.post_content }}</textarea>
 					</div>
 			</div>
 		</div>
@@ -38,17 +38,18 @@
 			<h4>Categories</h4>
 			{% for category in categories %}
 			<div>
-				<label><input type="checkbox" name="category" value="{{ category.pk }}"> {{ category.category_name }}</label>
+				<label><input type="checkbox" name="category" value="{{ category.pk }}" {% ifequal post.category category %} checked {% endifequal %} > {{ category.category_name }}</label>
 			</div>
 			{% endfor %}
 		</div>
 		<div class="sidebar-divs">
+			<img src="{{ post.featured_img.url }}" height="100" width="150"><br>
 			<label><a href="">Set featured image</a></label>
-			<input type="file" name="featured_img">
+			<input type="file" name="featured_img" value="{{ post.featured_img }}">
 		</div>
 		<div class="sidebar-divs"> 
 			<button type="reset" class="btn btn-danger">Cancel</button>
-			<button type="Submit" class="btn btn-primary">Save</button>
+			<button type="Submit" class="btn btn-primary">Update</button>
 		</div>
 	</form>
 	</div>
