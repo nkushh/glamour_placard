@@ -30,7 +30,7 @@ def blog_posts(request):
 
 def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)
-	posts = Post.objects.filter(published_on__isnull=False).order_by('-published_on')
+	posts = Post.objects.filter(published_on__isnull=False).order_by('-published_on')[:3]
 
 	context = {
 		'post' : post,
