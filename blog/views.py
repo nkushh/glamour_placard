@@ -22,7 +22,7 @@ def subscribe(request):
 		return redirect('about:home')
 
 def blog_posts(request):
-	posts = Post.objects.all()
+	posts = Post.objects.all().order_by('-published_on')
 	context = {
 		'posts' : posts,
 	}
