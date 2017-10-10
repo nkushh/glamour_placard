@@ -1,0 +1,49 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}New Post{% endblock %}
+
+{% block pagetitle %}New Post{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-8">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Post Details</h4>
+			</div>
+			<div class="panel-body">
+				<form method="POST" action="{% url 'blog:save_post' %}" enctype="multipart/form-data">{% csrf_token %}
+					<div class="form-group">
+						<label>Post title</label>
+						<input type="text" name="post_title" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Post body</label>
+						<textarea name="post_content" class="form-control" rows="10"></textarea>
+					</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<div class="col-md-4 right-sidebar">
+		<div class="sidebar-divs">
+			<h4>Categories</h4>
+			{% for category in categories %}
+			<div>
+				<label><input type="checkbox" name="category" value="{{ category.pk }}"> {{ category.category_name }}</label>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="sidebar-divs">
+			<label><a href="">Set featured image</a></label>
+			<input type="file" name="featured_img">
+		</div>
+		<div class="sidebar-divs"> 
+			<button type="reset" class="btn btn-danger">Cancel</button>
+			<button type="Submit" class="btn btn-primary">Save</button>
+		</div>
+	</form>
+	</div>
+</div>
+{% endblock %}

@@ -12,6 +12,8 @@ urlpatterns = [
 	url(r'^edit-category/(?P<category_id>\d+)/$', views.edit_blog_category, name='edit_category'),
 	url(r'^update-category/(?P<category_id>\d+)/$', views.update_blog_category, name='update_blog_category'),
 	url(r'^delete-category/(?P<category_id>\d+)/$', views.delete_blog_category, name='delete_category'),
+	url(r'^new-post/$', views.new_post, name='new_post'),
+	url(r'^save-post/$', views.new_blog_post, name='save_post'),
 	url(r'^post-details/(?P<pk>\d+)/', views.post_detail, name='post_detail'),
 	url(r'^subscribe/$', views.subscribe, name='subscribe'),
 ]

@@ -332,3 +332,11 @@ table td{
     line-height: 2em;
     font-size: 16px;
 }
+
+.right-sidebar{
+    border-left: 1px solid #ddd;
+}
+
+.sidebar-divs{
+    padding: 15px;
+}

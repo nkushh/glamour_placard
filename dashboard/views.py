@@ -11,32 +11,6 @@ from store.models import Product_categorie, Sub_categorie, Product
 def dashboard(request):
 	return render(request, 'dashboard/index.html')
 
-# Accounts CRUD functions
-
-# @login_required(login_url='login')
-# def new_account(request):
-#     return render(request, 'dashboard/add-user.html')
-
-
-# @login_required(login_url='login')
-# def create_account(request):
-#     if request.method == 'POST':
-#         username = request.POST['username']
-#         email =  request.POST['email']
-#         password =  request.POST['password']
-
-#         if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
-#             User.objects.create_user(username, email, password)
-#             messages.success(request, "Success! Account detail successfully recorded.")
-#         else:
-#         	messages.warning(request, "Error! Looks like a username with that email or password already exists.")
-#     else:
-#     	return render(request, 'dashboard/create-account.html')
-
-
-
-
-# End of Accounts CRUD functions
 
 
 
