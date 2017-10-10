@@ -18,7 +18,7 @@ class Post(models.Model):
 	featured_img = models.ImageField(upload_to='posts')
 	author = models.ForeignKey('auth.User')
 	created_on = models.DateTimeField(auto_now_add=True)
-	published_on = models.DateTimeField(auto_now_add=False, auto_now=True)
+	published_on = models.DateTimeField(auto_now_add=False, null=True)
 
 	def publish(self):
 		self.published_on = timezone.now()

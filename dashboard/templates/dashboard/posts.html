@@ -37,7 +37,7 @@
 					<td>{{ post.post_title }}</td>
 					<td>{{ post.category }}</td>
 					<td>{{ post.created_on }}</td>
-					<td>{{ post.published_on }}</td>
+					<td>{% if post.published_on %}{{ post.published_on }}{% else %}<span class="badge badge-danger">Unpublished</span>{% endif %}</td>
 					<td>{{ post.author }}</td>
 				</tr>
 				{% endfor %}
