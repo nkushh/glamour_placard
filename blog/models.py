@@ -15,7 +15,7 @@ class Post(models.Model):
 	category = models.ForeignKey(Categorie, on_delete=models.CASCADE)
 	post_title = models.CharField(max_length=200)
 	post_content = models.TextField()
-	featured_img = models.ImageField(upload_to='posts', null=True, blank=True)
+	featured_img = models.ImageField(upload_to='posts', blank=True)
 	author = models.ForeignKey('auth.User')
 	created_on = models.DateTimeField(auto_now_add=True)
 	published_on = models.DateTimeField(auto_now_add=False, null=True)

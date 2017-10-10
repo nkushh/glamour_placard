@@ -43,9 +43,13 @@
 			{% endfor %}
 		</div>
 		<div class="sidebar-divs">
+			{% if post.featured_img %}
 			<img src="{{ post.featured_img.url }}" height="100" width="150"><br>
+			{% else %}
+			<h4>No Image Available</h4>
+			{% endif %}
 			<label><a href="">Set featured image</a></label>
-			<input type="file" name="featured_img" value="{{ post.featured_img }}">
+			<input type="file" name="featured_img">
 		</div>
 		<div class="sidebar-divs"> 
 			<button type="reset" class="btn btn-danger">Cancel</button>

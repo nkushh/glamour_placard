@@ -170,16 +170,21 @@ def new_blog_post(request):
 		category = get_object_or_404(Categorie, pk=request.POST['category'])
 		post_title = request.POST['post_title']
 		post_content = request.POST['post_content']
-		featured_img = request.FILES['featured_img']
+		if len(request.FILES) > 0:
+			featured_img = request.FILES['featured_img']
 		author = request.user
 		if Post.objects.filter(post_title=post_title).exists():
 			messages.error(request, "Error! A blog post with title '{}' already exists. Try another".format(post_title))
 			return redirect('blog:new_post')
 		else:
-			post = Post(category=category, post_title=post_title, post_content=post_content, featured_img=featured_img, author=author)
+			if len(request.FILES) > 0:
+				post = Post(category=category, post_title=post_title, post_content=post_content, featured_img=featured_img, author=author)
+			else:
+				post = Post(category=category, post_title=post_title, post_content=post_content, author=author)
+
 			post.save()
 			messages.success(request, "Success! Blog post details have been saved")
-			return redirect('blog:blog_posts')
+			return redirect('blog:posts')
 	else:
 		return redirect('blog:new_post')
 
@@ -203,7 +208,8 @@ def update_post(request, post_id):
 		post.category = get_object_or_404(Categorie, pk=request.POST['category'])
 		post.post_title = request.POST['post_title']
 		post.post_content = request.POST['post_content']
-		post.featured_img = request.FILES['featured_img']
+		if len(request.FILES) > 0:
+			post.featured_img = request.FILES['featured_img']
 		
 		post.save()
 		messages.success(request, "Success! {} details have been updated.".format(post.post_title))
