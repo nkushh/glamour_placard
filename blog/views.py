@@ -146,12 +146,23 @@ def new_post(request):
 # 	}
 # 	return render(request, "dashboard/post_details.html", context)
 
+@login_required(login_url='login')
+def post_details(request, post):
+	blog_post = get_object_or_404(Post, pk=post)
+
+	context = {
+		'post' : blog_post,
+	}
+
+	return render(request, "dashboard/post-detail.html", context)
+
 # Function to publish a draft post
-# @login_required(login_url='login')
-# def publish_blog_post(request, post_id):
-# 	post = get_object_or_404(Post, pk=post_id)
-# 	post.publish()
-# 	return redirect("dashboard:post-details", post_id=post_id)
+@login_required(login_url='login')
+def publish_post(request, post):
+	blog_post = get_object_or_404(Post, pk=post)
+	blog_post.publish()
+	messages.success(request, "Success! Blog Post has been published and available to the public.")
+	return redirect("dashboard:post_details", post=post)
 
 @login_required(login_url='login')
 def new_blog_post(request):

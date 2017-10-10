@@ -1,0 +1,35 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Post Detail{% endblock %}
+
+{% block pagetitle %}Post Detail{% endblock %}
+
+
+{% block content %}
+<div class="row">
+	<div class="col-md-8">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Post #{{ post.pk }}</h4>
+			</div>
+			<div class="panel-body">
+				<img src="{{ post.featured_img.url }}" class="img-responsive">
+				<h3>{{ post.post_title }}</h3>
+				<h4>Category: {{ post.category }}</h4>
+				<h4>Created on: {{ post.created_on }}</h4>
+				<p>{{ post.post_content|linebreaks }}</p>
+			</div>
+		</div>
+	</div>
+	<!-- Sidebar -->
+	<div class="col-md-4 right-sidebar">
+		<div class="sidebar-div">
+			{% if not post.published_on %}
+			<a href="{% url 'blog:publish_post' post.pk %}" class="btn btn-success">Publish</a>
+			{% endif %}
+			<a href="" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+			<a href="" class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+		</div>
+	</div>
+</div>
+{% endblock %}

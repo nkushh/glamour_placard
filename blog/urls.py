@@ -16,5 +16,8 @@ urlpatterns = [
 	url(r'^new-post/$', views.new_post, name='new_post'),
 	url(r'^save-post/$', views.new_blog_post, name='save_post'),
 	url(r'^post-details/(?P<pk>\d+)/', views.post_detail, name='post_detail'),
+	# Admin side
+	url(r'^post-detail/(?P<post>\d+)/', views.post_details, name='post_details'),
+	url(r'^publish-post/(?P<post>\d+)/$', views.publish_post, name='publish_post'),
 	url(r'^subscribe/$', views.subscribe, name='subscribe'),
 ]

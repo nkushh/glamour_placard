@@ -34,7 +34,7 @@
 				{% for post in posts %}
 				<tr>
 					<td>{{ post.pk }}</td>
-					<td>{{ post.post_title }}</td>
+					<td><a href="{% url 'blog:post_details' post.pk %}">{{ post.post_title }}</a></td>
 					<td>{{ post.category }}</td>
 					<td>{{ post.created_on }}</td>
 					<td>{% if post.published_on %}{{ post.published_on }}{% else %}<span class="label label-warning">Draft</span>{% endif %}</td>
