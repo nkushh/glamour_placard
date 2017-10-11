@@ -19,6 +19,8 @@
     <link href="{% static 'dashboard/css/font-awesome.css' %}" rel="stylesheet" />
     <!-- CUSTOM STYLE  -->
     <link href="{% static 'dashboard/css/style.css' %}" rel="stylesheet" />
+    <!-- Live search styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
      <!-- HTML5 Shiv and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -151,5 +153,12 @@
     <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
     <!-- BOOTSTRAP SCRIPTS  -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- Live search dropdown -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+    <script type="text/javascript">
+    $(".selectpicker").chosen();
+    </script>
 </body>
 </html>
