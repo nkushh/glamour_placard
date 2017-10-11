@@ -318,6 +318,11 @@ footer {
 
 
 /* Custom styles by piero Muguna Mbaabu */
+.login-area{
+    width: 40%;
+    margin: 0 auto;
+}
+
 
 .action-btns{
     text-align: right;
