@@ -1,0 +1,48 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Item Sub-categories{% endblock %}
+
+{% block pagetitle %}All Sub-categories{% endblock %}
+
+{% block content %}
+<div class="row">
+	{% if messages %}
+	{% for message in messages %}
+	<div {% ifequal message.tags 'error' %} class="alert alert-danger" {% else %} class="alert alert-{{ message.tags }}"{% endifequal %}>{{ message.message }}</div>
+	{% endfor %}
+	{% endif %}
+
+	<div class="action-btns">
+			<a href="{% url 'store:all_items' %}" class="btn btn-success"><i class="fa fa-list"></i> Items</a>
+			<button data-toggle="modal" data-target="#itemCategory" class="btn btn-primary"><i class="fa fa-plus"></i> New Sub-category</button>
+	</div>
+
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<th>Category #</th>
+				<th>Sub-category</th>
+				<th>Items</th>
+				<th class="text-center">Action</th>
+			</thead>
+			<tbody>
+				{% for category in categories %}
+				<tr>
+					<td>{{ category.pk }}</td>
+					<td><a href="">{{ category.sub_category }}</a></td>
+					<td>{{ category.product_set.all|length }}</td>
+					<td class="text-center">
+						<a href=""><i class="fa fa-edit"></i> Edit</a>  
+						<a href="{% url 'store:delete_category' category.pk %}" style="margin-left: 4%; color: red;" onclick="return confirm('This action is irreversible. Are you sure?')"><i class="fa fa-trash-o"></i> Delete</a>
+					</td>
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="5"><h4>No item categories to recorded yet!</h4></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock %}

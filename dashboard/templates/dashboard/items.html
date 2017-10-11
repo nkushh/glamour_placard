@@ -1,0 +1,48 @@
+{% extends "dashboard/base.html" %}
+{% load humanize %}
+
+{% block title %}Items{% endblock %}
+
+{% block pagetitle %}All Items{% endblock %}
+
+{% block content %}
+<div class="row">
+	{% if messages %}
+	{% for message in messages %}
+	<div {% ifequal message.tags 'error' %} class="alert alert-danger" {% else %} class="alert alert-{{ message.tags }}"{% endifequal %}>{{ message.message }}</div>
+	{% endfor %}
+	{% endif %}
+
+	<div class="action-btns">
+			<a href="{% url 'store:item_categories' %}" class="btn btn-success"><i class="fa fa-flag"></i> Categories</a>
+			<a href="#" class="btn btn-primary"><i class="fa fa-plus"></i> New Item</a>
+	</div>
+
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<th>Item #</th>
+				<th>Item</th>
+				<th>Category</th>
+				<th>Item price</th>
+				<th>Stock</th>
+			</thead>
+			<tbody>
+				{% for item in items %}
+				<tr>
+					<td>{{ item.pk }}</td>
+					<td><a href="">{{ item.product_name }}</a></td>
+					<td>{{ item.category }}</td>
+					<td>{{ item.price|intcomma }}</td>
+					<td>{{ item.stock }}</td>
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="5"><h4>No items to recorded yet!</h4></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock %}
