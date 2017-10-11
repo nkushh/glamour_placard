@@ -313,6 +313,10 @@ footer {
 
 /*************************************************/
 
+
+
+
+
 /* Custom styles by piero Muguna Mbaabu */
 
 .action-btns{
@@ -339,4 +343,18 @@ table td{
 
 .sidebar-divs{
     padding: 15px;
+}
+
+form.new-item-form{
+    margin: 0 auto;
+    width: 40%;
+}
+
+form.new-item-form label{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+form.new-item-form .btn-div{
+    text-align: center;
 }

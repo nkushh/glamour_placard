@@ -13,5 +13,8 @@ urlpatterns = [
 	url(r'^item-categories/$', views.item_categories, name='item_categories'),
 	url(r'^delete-category/(?P<category_id>\d+)/$', views.delete_category, name='delete_category'),
 	url(r'^sub-categories/(?P<category_id>\d+)/$', views.all_subcategories, name='sub_categories'),
+	url(r'^add-subcategory/$', views.new_subcategory, name='new_subcategory'),
 	url(r'^items/$', views.all_items, name='all_items'),
+	url(r'^new-item/$', views.new_item, name='new_item'),
+	url(r'^add-item/$', views.add_item, name='add_item'),
 ]

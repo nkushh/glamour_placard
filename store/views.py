@@ -65,14 +65,31 @@ def delete_category(request, category_id):
 # Fetches sub-categories of an item category
 @login_required(login_url='login')
 def all_subcategories(request, category_id):
-	category = get_object_or_404(Product_categorie, pk=category_id)
-	categories = Sub_categorie.objects.filter(category=category).order_by('-created_on')
+	categoriess = Product_categorie.objects.all()
+	categories = Sub_categorie.objects.filter(category=get_object_or_404(Product_categorie, pk=category_id)).order_by('-created_on')
 
 	context = {
+		'categoriess' : categoriess,
 		'categories' : categories,
 	}
 
 	return render(request, "dashboard/sub-categories.html", context)
+
+@login_required(login_url='login')
+def new_subcategory(request):
+	if request.method == "POST":
+		category = get_object_or_404(Product_categorie, pk=request.POST['category'])
+		sub_category = request.POST['sub_category']
+
+		if not(Sub_categorie.objects.filter(sub_category=sub_category).exists()):
+			category = Sub_categorie(category=category, sub_category=sub_category).save()
+			messages.success(request, "Success! {} category details successfully recorded.".format(sub_category))
+			return redirect('store:sub_categories', category_id=request.POST['category'])
+		else:
+			messages.error(request, "Error! {} category name already exists. Try another.".format(category_name))
+			return redirect('store:sub_categories', category_id=request.POST['category'])
+	else:
+		return redirect('store:item_categories')
 
 
 
@@ -86,3 +103,44 @@ def all_items(request):
 	}
 
 	return render(request, "dashboard/items.html", context)
+
+
+# Render template to add new item
+@login_required(login_url='login')
+def new_item(request):
+	categories = Sub_categorie.objects.all()
+
+	context = {
+		'categories' : categories,
+	}
+
+	return render(request, "dashboard/new-item.html", context)
+
+@login_required(login_url='login')
+def add_item(request):
+	if request.method=="POST":
+		sub_category = get_object_or_404(Sub_categorie, pk=request.POST['category'])
+		category = sub_category.category
+		product_name = request.POST['product_name']
+		color = request.POST['color']
+		price = request.POST['price']
+		size = request.POST['size']
+		stock = request.POST['stock']
+		description = request.POST['description']
+		if len(request.FILES) > 0:
+			product_img = request.FILES['product_img']
+
+		if Product.objects.filter(product_name=product_name).exists():
+			messages.error(request, "Error! A product with name '{}' already exists. Try another".format(product_name))
+			return redirect('store:new_item')
+		else:
+			if len(request.FILES) > 0:
+				item = Product(category=category, sub_category=sub_category, product_name=product_name, color=color, price=price, description=description, stock=stock, product_img=product_img)
+			else:
+				item = Product(category=category, sub_category=sub_category, product_name=product_name, color=color, price=price, description=description, stock=stock)
+
+			item.save()
+			messages.success(request, "Success! Item {} details have been saved".format(product_name))
+			return redirect('store:all_items')
+	else:
+		return redirect('store:new_item')
