@@ -136,4 +136,5 @@ MEDIA_URL = '/media/'
 
 # Login redirect
 LOGIN_REDIRECT_URL = '/dashboard'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 

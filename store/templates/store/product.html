@@ -23,7 +23,7 @@
 				</tr>
 				<tr>
 					<th>Availability</th>
-					<td>{% ifequal product.availability_status 0 %}<span class="label label-success">Available</span>{% else %}<span class="label label-danger">Not Available</span>{% endifequal %}</td>
+					<td>{% if product.availability_status == 0 %}<span class="label label-success">Available</span>{% else %}<span class="label label-danger">Not Available</span>{% endif %}</td>
 				</tr>
 				<tr>
 					<th>Description</th>

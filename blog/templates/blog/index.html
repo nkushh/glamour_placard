@@ -3,9 +3,11 @@
 
 {% block title %}Blog{% endblock %}
 
-{% block page_title %}Recent Blog Posts{% endblock %}
-
 {% block content %}
+<div class="page-header">
+	<h2>Recent Blog Posts</h2>
+</div>
+
 <!-- Recent Posts -->
 <div class="col-md-8 blog-posts">
 	{% for post in posts %}

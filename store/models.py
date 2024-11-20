@@ -18,7 +18,7 @@ class Sub_categorie(models.Model):
 
 
 class Product(models.Model):
-	category = models.ForeignKey(Product_categorie)
+	category = models.ForeignKey(Product_categorie, null=True, on_delete=models.SET_NULL)
 	sub_category = models.ForeignKey(Sub_categorie, on_delete=models.CASCADE)
 	product_name = models.CharField(max_length=200)
 	color = models.CharField(max_length=200, blank=True)

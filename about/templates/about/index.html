@@ -9,7 +9,7 @@
 	<div class="container">
 		{% if messages %}
 		{% for message in messages %}
-		<div class="alert alert-{% ifequal message.tags 'warning' %}danger{% else %}{{ message.tags }}{% endifequal%}">{{ message }}</div>
+		<div class="alert alert-{{ message.tags }}">{{ message }}</div>
 		{% endfor %}
 		{% endif %}
 		<div class="hero-text-wrapper">

@@ -16,7 +16,7 @@ class Post(models.Model):
 	post_title = models.CharField(max_length=200)
 	post_content = models.TextField()
 	featured_img = models.ImageField(upload_to='posts', blank=True)
-	author = models.ForeignKey('auth.User')
+	author = models.ForeignKey('auth.User', null=True, on_delete=models.SET_NULL)
 	created_on = models.DateTimeField(auto_now_add=True)
 	published_on = models.DateTimeField(auto_now_add=False, null=True)
 
@@ -32,7 +32,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-	post = models.ForeignKey(Post, related_name='comments')
+	post = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL, related_name='comments')
 	author = models.CharField(max_length=100)
 	text = models.TextField()
 	created_date = models.DateTimeField(default=timezone.now)
